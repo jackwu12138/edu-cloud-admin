@@ -1,25 +1,71 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import Vue from "vue";
+import Router from 'vue-router'
+import Layout from '@/layout'
+
+Vue.use(Router)
 
 const routes = [
+
   {
-    path: '/',
-    name: 'home',
-    component: HomeView
+    path: "/",
+    component: Layout,
+    redirect: "/dashboard",
+    children: [{
+      path: "dashboard",
+      name: "首页",
+      component: () => import("@/views/home/Home"),
+      meta: {title: "首页", icon: "el-icon-menu"},
+    }],
   },
+
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
-]
+    path: "/course",
+    component: Layout,
+    name: "课程管理",
+    redirect: 'noRedirect',
+    meta: {
+      title: "课程管理",
+      icon: "el-icon-s-tools",
+    },
+    children: [
+      {
+        path: "article",
+        name: "文章",
+        // component: () => import("@/views/course/article/Article"),
+        redirect: 'index',
+        component: {render: c => c('router-view')},
+        meta: {title: "文章", icon: "el-icon-s-tools"},
+        children: [
+          {
+            hidden: true,
+            path: "type",
+            name: "文章类型",
+            component: () => import("@/views/course/article/ArticleType"),
+            meta: {title: "文章类型", activeMenu: '/course/article'},
+          },
+          {
+            path: "index",
+            name: "文章",
+            component: () => import("@/views/course/article/Article"),
+            meta: {title: "文章", breadcrumb: false},
+          },
+        ],
+      },
 
-const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
-  routes
-})
+    ],
+  },
+];
 
-export default router
+
+let routerPush = Router.prototype.push;
+Router.prototype.push = function push(location) {
+  return routerPush.call(this, location).catch(err => err)
+}
+
+const router = new Router({
+  base: process.env.VUE_APP_APP_NAME ? process.env.VUE_APP_APP_NAME : "/",
+  mode: 'history',
+  routes: routes,
+});
+
+export default router;
