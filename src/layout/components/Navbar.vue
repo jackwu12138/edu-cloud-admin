@@ -1,37 +1,26 @@
 <template>
   <div class="navbar">
-    <hamburger
-      :is-active="sidebar.opened"
-      @toggleClick="toggleSideBar"
-      class="hamburger-container"
-    />
+    <hamburger id="hamburger-container" :is-active="sidebar.opened" class="hamburger-container"
+               @toggleClick="toggleSideBar"/>
 
-    <breadcrumb class="breadcrumb-container"/>
+    <breadcrumb id="breadcrumb-container" class="breadcrumb-container"/>
 
     <div class="right-menu">
-      <el-dropdown class="avatar-container" trigger="click">
+      <template v-if="device!=='mobile'">
+        <screenfull id="screenfull" class="right-menu-item hover-effect"/>
+      </template>
+
+      <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
         <div class="avatar-wrapper">
-          <img :src="avatar + '?imageView2/1/w/80/h/80'" class="user-avatar"/>
+          <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">
           <i class="el-icon-caret-bottom"/>
         </div>
-        <el-dropdown-menu class="user-dropdown" slot="dropdown">
-          <router-link to="/">
-            <el-dropdown-item> Home</el-dropdown-item>
+        <el-dropdown-menu slot="dropdown">
+          <router-link to="/profile/index">
+            <el-dropdown-item>个人信息</el-dropdown-item>
           </router-link>
-          <a
-            href="https://github.com/PanJiaChen/vue-admin-template/"
-            target="_blank"
-          >
-            <el-dropdown-item>Github</el-dropdown-item>
-          </a>
-          <a
-            href="https://panjiachen.github.io/vue-element-admin-site/#/"
-            target="_blank"
-          >
-            <el-dropdown-item>Docs</el-dropdown-item>
-          </a>
-          <el-dropdown-item @click.native="logout" divided>
-            <span style="display: block">Log Out</span>
+          <el-dropdown-item divided @click.native="logout">
+            <span style="display:block;">退出登录</span>
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
@@ -40,28 +29,34 @@
 </template>
 
 <script>
-import {mapGetters} from "vuex";
-import Breadcrumb from "@/components/Breadcrumb";
-import Hamburger from "@/components/Hamburger";
+import {mapGetters} from 'vuex'
+import Breadcrumb from '@/components/Breadcrumb'
+import Hamburger from '@/components/Hamburger'
+import Screenfull from '@/components/Screenfull'
 
 export default {
   components: {
     Breadcrumb,
     Hamburger,
+    Screenfull,
   },
   computed: {
-    ...mapGetters(["sidebar", "avatar"]),
+    ...mapGetters([
+      'sidebar',
+      'avatar',
+      'device',
+    ]),
   },
   methods: {
     toggleSideBar() {
-      this.$store.dispatch("app/toggleSideBar");
+      this.$store.dispatch('app/toggleSideBar')
     },
     async logout() {
-      await this.$store.dispatch("user/logout");
-      this.$router.push(`/login?redirect=${this.$route.fullPath}`);
+      await this.$store.dispatch('user/logout')
+      this.$router.push(`/login?redirect=${this.$route.fullPath}`)
     },
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -70,23 +65,28 @@ export default {
   overflow: hidden;
   position: relative;
   background: #fff;
-  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+  box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
 
   .hamburger-container {
     line-height: 46px;
     height: 100%;
     float: left;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: background .3s;
     -webkit-tap-highlight-color: transparent;
 
     &:hover {
-      background: rgba(0, 0, 0, 0.025);
+      background: rgba(0, 0, 0, .025)
     }
   }
 
   .breadcrumb-container {
     float: left;
+  }
+
+  .errLog-container {
+    display: inline-block;
+    vertical-align: top;
   }
 
   .right-menu {
@@ -108,10 +108,10 @@ export default {
 
       &.hover-effect {
         cursor: pointer;
-        transition: background 0.3s;
+        transition: background .3s;
 
         &:hover {
-          background: rgba(0, 0, 0, 0.025);
+          background: rgba(0, 0, 0, .025)
         }
       }
     }

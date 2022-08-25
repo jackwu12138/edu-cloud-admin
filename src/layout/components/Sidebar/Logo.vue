@@ -1,28 +1,21 @@
 <template>
-  <div :class="{ collapse: collapse }" class="sidebar-logo-container">
+  <div class="sidebar-logo-container" :class="{'collapse':collapse}">
     <transition name="sidebarLogoFade">
-      <router-link
-        class="sidebar-logo-link"
-        key="collapse"
-        to="/"
-        v-if="collapse"
-      >
-        <img :src="logo" alt="logo" class="sidebar-logo" v-if="logo"/>
-        <h1 class="sidebar-title" v-else>{{ title }}</h1>
+      <router-link v-if="collapse" key="collapse" class="sidebar-logo-link" to="/">
+        <img v-if="logo" :src="logo" class="sidebar-logo">
+        <h1 v-else class="sidebar-title">{{ title }} </h1>
       </router-link>
-      <router-link class="sidebar-logo-link" key="expand" to="/" v-else>
-        <img :src="logo" alt="logo" class="sidebar-logo" v-if="logo"/>
-        <h1 class="sidebar-title">{{ title }}</h1>
+      <router-link v-else key="expand" class="sidebar-logo-link" to="/">
+        <img v-if="logo" :src="logo" class="sidebar-logo">
+        <h1 class="sidebar-title">{{ title }} </h1>
       </router-link>
     </transition>
   </div>
 </template>
 
 <script>
-import logoImg from "@/assets/logo.png";
-
 export default {
-  name: "SidebarLogo",
+  name: 'SidebarLogo',
   props: {
     collapse: {
       type: Boolean,
@@ -31,11 +24,11 @@ export default {
   },
   data() {
     return {
-      title: "后台管理系统",
-      logo: logoImg,
-    };
+      title: 'edu - 后台管理',
+      logo: 'https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png',
+    }
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -53,7 +46,7 @@ export default {
   width: 100%;
   height: 50px;
   line-height: 50px;
-  background: rgb(48, 65, 86);
+  background: #304156;
   text-align: center;
   overflow: hidden;
 

@@ -5,7 +5,17 @@ import Layout from '@/layout'
 Vue.use(Router)
 
 const routes = [
-
+  {
+    path: '/redirect',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: '/redirect/:path(.*)',
+        component: () => import('@/views/redirect/index'),
+      },
+    ],
+  },
   {
     path: "/",
     component: Layout,
@@ -62,10 +72,22 @@ Router.prototype.push = function push(location) {
   return routerPush.call(this, location).catch(err => err)
 }
 
-const router = new Router({
+
+const createRouter = () => new Router({
   base: process.env.VUE_APP_APP_NAME ? process.env.VUE_APP_APP_NAME : "/",
   mode: 'history',
+  scrollBehavior: () => ({y: 0}),
   routes: routes,
-});
+})
+
+const router = createRouter()
+
+export function resetRouter() {
+  let newRouter = createRouter()
+  router.matcher = newRouter.matcher // reset router
+}
+
 
 export default router;
+
+
