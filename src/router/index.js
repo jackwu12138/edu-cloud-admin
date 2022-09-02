@@ -27,7 +27,11 @@ const routes = [
       meta: {title: "首页", icon: "fa-th-large"},
     }],
   },
-
+  {
+    path: '/404',
+    component: () => import('@/views/error/404'),
+    hidden: true,
+  },
   {
     path: "/course",
     component: Layout,
@@ -78,6 +82,8 @@ const routes = [
 
     ],
   },
+  {path: '*', redirect: '/404', hidden: true},
+
 ];
 
 
