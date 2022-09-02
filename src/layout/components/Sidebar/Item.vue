@@ -13,14 +13,15 @@ export default {
     },
   },
   render(h, context) {
-    const {icon, title} = context.props
+    let {icon, title} = context.props
     const vnodes = []
 
     if (icon) {
       if (icon.includes('el-icon')) {
         vnodes.push(<i class={[icon, 'sub-el-icon']}/>)
       } else {
-        vnodes.push(<svg-icon icon-class={icon}/>)
+        icon = 'fa ' + icon
+        vnodes.push(<font-awesome-icon icon={(icon)}></font-awesome-icon>)
       }
     }
 
@@ -37,5 +38,12 @@ export default {
   color: currentColor;
   width: 1em;
   height: 1em;
+}
+
+.svg-inline--fa {
+  width: 1em;
+  height: 1em;
+  color: currentColor;
+  margin: 0 12px 0 -2px;
 }
 </style>

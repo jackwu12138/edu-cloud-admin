@@ -24,7 +24,7 @@ const routes = [
       path: "dashboard",
       name: "首页",
       component: () => import("@/views/home/Home"),
-      meta: {title: "首页", icon: "el-icon-menu"},
+      meta: {title: "首页", icon: "fa-th-large"},
     }],
   },
 
@@ -35,7 +35,7 @@ const routes = [
     redirect: 'noRedirect',
     meta: {
       title: "课程管理",
-      icon: "el-icon-s-tools",
+      icon: "fa-book",
     },
     children: [
       {
@@ -44,20 +44,34 @@ const routes = [
         // component: () => import("@/views/course/article/Article"),
         redirect: 'index',
         component: {render: c => c('router-view')},
-        meta: {title: "文章", icon: "el-icon-s-tools"},
+        meta: {title: "文章", icon: "fa-paste"},
         children: [
-          {
-            hidden: true,
-            path: "type",
-            name: "文章类型",
-            component: () => import("@/views/course/article/ArticleType"),
-            meta: {title: "文章类型", activeMenu: '/course/article'},
-          },
           {
             path: "index",
             name: "文章",
             component: () => import("@/views/course/article/Article"),
             meta: {title: "文章", breadcrumb: false},
+          },
+          {
+            hidden: true,
+            path: "type",
+            name: "文章类型",
+            component: () => import("@/views/course/article/ArticleType"),
+            meta: {title: "文章类型", activeMenu: '/course/article/index'},
+          },
+          {
+            hidden: true,
+            path: 'create',
+            name: "新建文章",
+            component: () => import("@/views/course/article/EditArticle"),
+            meta: {title: "新建文章", activeMenu: '/course/article/index'},
+          },
+          {
+            hidden: true,
+            path: 'edit',
+            name: "编辑文章",
+            component: () => import("@/views/course/article/EditArticle"),
+            meta: {title: "编辑文章", activeMenu: '/course/article/index'},
           },
         ],
       },

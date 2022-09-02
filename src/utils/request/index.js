@@ -8,6 +8,9 @@ const service = axios.create({
   timeout: 30000,
 });
 
+// 默认请求头
+axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
+
 // ==================== 请求拦截器 ==================== //
 
 service.interceptors.request.use(
