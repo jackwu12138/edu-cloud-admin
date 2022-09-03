@@ -40,7 +40,7 @@ export function updateArticleTypeList(data) {
  */
 export function getArticleTypeList() {
   return request({
-    url: '/course/article-type/get-list',
+    url: '/course/article-type/list',
     method: 'get',
   })
 }
@@ -50,7 +50,7 @@ export function getArticleTypeList() {
  */
 export function getArticleTypeSampleList() {
   return request({
-    url: '/course/article-type/get-simple-list',
+    url: '/course/article-type/simple-list',
     method: 'get',
   })
 }

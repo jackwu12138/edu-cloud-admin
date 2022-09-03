@@ -39,6 +39,7 @@ Vue.use(ElementUI, {
   size: Cookies.get('size') || 'medium',
 })
 
+// markdown插件
 VueMarkdownEditor.use(vuepressTheme, {
   Prism,
 });

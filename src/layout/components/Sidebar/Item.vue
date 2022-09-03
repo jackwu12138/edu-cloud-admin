@@ -41,9 +41,9 @@ export default {
 }
 
 .svg-inline--fa {
-  width: 1em;
-  height: 1em;
+  width: 1.5em;
+  height: 1.5em;
   color: currentColor;
-  margin: 0 12px 0 -2px;
+  margin: 0 12px 0 12px;
 }
 </style>

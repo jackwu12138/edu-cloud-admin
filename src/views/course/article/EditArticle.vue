@@ -122,6 +122,8 @@ export default {
         this.formData = res.data
         this.loading = false
         this.init = true
+      }).catch(err => {
+        this.$router.replace('/404')
       })
     } else {
       this.init = true

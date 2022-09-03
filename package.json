@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "vue-cli-service serve --mode dev",
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build --mode prod"
   },
   "dependencies": {
     "@fortawesome/fontawesome": "^1.1.8",
@@ -19,7 +19,9 @@
     "@kangc/v-md-editor": "^1.7.11",
     "@riophae/vue-treeselect": "0.4.0",
     "axios": "0.24.0",
+    "chalk": "^5.0.1",
     "compression-webpack-plugin": "^5.0.2",
+    "connect": "^3.7.0",
     "core-js": "^3.8.3",
     "element-ui": "2.15.8",
     "fuse.js": "3.4.4",
@@ -29,7 +31,9 @@
     "path-to-regexp": "2.4.0",
     "prismjs": "^1.29.0",
     "qs": "^6.11.0",
+    "runjs": "^4.4.2",
     "screenfull": "4.2.0",
+    "serve-static": "^1.15.0",
     "vue": "2.6.12",
     "vue-router": "3.4.9",
     "vuex": "3.6.0",
